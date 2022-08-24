@@ -51,7 +51,7 @@ button {
 }
 
 .clear {
-    border-radius: 50px;
+    border-radius: 35px;
     width: 230px;
     background: #9f9f9f;
     color: black;
@@ -61,7 +61,7 @@ button {
 
 .zero {
     width: 150px;
-    border-radius: 50px;
+    border-radius: 35px;
 }
 
 .divide, .multiply, .subtract, .add, .operate {
