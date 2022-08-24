@@ -50,7 +50,7 @@ button {
     font-weight: bold;
 }
 
-#clear {
+.clear {
     border-radius: 50px;
     width: 230px;
     background: #9f9f9f;
@@ -59,11 +59,26 @@ button {
     font-weight: bold;
 }
 
-#zero {
+.zero {
     width: 150px;
     border-radius: 50px;
 }
 
-#divide, #multiply, #subtract, #add, #operate {
+.divide, .multiply, .subtract, .add, .operate {
     background: #f69906;
+}
+
+.buttonDownClear{
+    scale: 0.95;
+    background: #555;
+}
+
+.buttonDownOperator {
+    scale: 0.95;
+    background: #af720f;
+}
+
+.buttonDownNumber {
+    scale: 0.95;
+    background: #1f1f1f;
 }
