@@ -31,6 +31,7 @@ function operate(operator, a, b) {
 const buttons = document.querySelectorAll("button");
 for(button of buttons) {
     button.addEventListener("mousedown", buttonDown);
+    button.addEventListener("mousedown", calculate);
     button.addEventListener("mouseleave", buttonUp);
     button.addEventListener("mouseup", buttonUp);
 }
@@ -64,7 +65,8 @@ firstNumber = null;
 secondNumber = null;
 operator = null;
 
-// On button mousedown do the following
+// Handle all scenarios of different button presses for the calculator, to occur on mouse down event
+function calculate(button) {
     // if firstNumber === null
         // if display === 0
             // if number was pushed
@@ -73,14 +75,10 @@ operator = null;
             // else if operator was pushed
                 // store the display value to firstNumber
                 // store the operator clicked to operator
-            // else if clear was pushed
-                // set firstNumber to null
-                // set operator to null
             // else if decimal was pushed
-                //
-            // else if operate was pushed
-                //
-        // else
+                // if no decimal in number yet
+                    // add decimal to number
+        // else if display is a number
             // if number was pushed
                 // add number to the display text
             // else if operator was pushed
@@ -88,12 +86,9 @@ operator = null;
                 // store the operator clicked to operator
             // else if clear was pushed
                 // reset display to 0
-                // reset firstNumber to null
-                // reset operator to null
             // else if decimal was pushed
-                // 
-            // else if operate was pushed
-                // 
+                // if no decimal in number yet
+                    // add decimal to number
     // else 
         // if display === 0
             // if number was pushed
@@ -103,20 +98,32 @@ operator = null;
                 // set secondNumber to display value
                 // change display to operate(operator, firstNumber, secondNumber)
                 // change firstNumber to display value
+                // change operator to operator that was pushed
             // else if clear was pushed
-                // 
+                // reset firstNumber to null
+                // reset operator to null
             // else if decimal was pushed
-                // 
+                // if no decimal in number yet
+                    // add decimal to number
             // else if operate was pushed
-                // 
+                // set secondNumber to display value
+                // change display to operate(operator, firstNumber, secondNumber)
+                // change firstNumber to display value
         // else
             // if number was pushed
-                // 
+                // add number to the display text
             // else if operator was pushed
-                // 
+                // set secondNumber to display value
+                // change display to operate(operator, firstNumber, secondNumber)
+                // change firstNumber to display value
+                // change operator to operator that was pushed
             // else if clear was pushed
-                // 
+                // reset display to 0
             // else if decimal was pushed
-                // 
+                // if no decimal in number yet
+                    // add decimal to number
             // else if operate was pushed
-                // 
+                // set secondNumber to display value
+                // change display to operate(operator, firstNumber, secondNumber)
+                // change firstsNumber to display value
+}
