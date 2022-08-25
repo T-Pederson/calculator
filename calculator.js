@@ -24,9 +24,10 @@ function operate(operator, a, b) {
     if (isNaN(solution) || typeof solution !== 'number') {
         return "ERROR";
     } else {
-        // Restrict return value to 9 numbers
-            // round decimal if needed to fit number
-            // output scientific notation if needed to fit number
+        // if solution contains more than 9 numbers
+            // return scientific notation of solution to fit number
+        // else
+            // return solution;
     }
 }
 
@@ -71,8 +72,12 @@ let operator;
 
 // Handle all scenarios of button presses for the calculator
 function calculate(button) {
-    // if firstNumber === undefined
-        // if display === "0"
+    let result = document.querySelector(".result").innerText;
+    const pushed = button.target.innerText;
+    console.log(typeof result);
+    console.log(typeof pushed);
+    if (firstNumber === undefined) {
+        if (result === "0") {
             // if number was pushed
                 // clear display 
                 // put in new number to the display
@@ -81,6 +86,7 @@ function calculate(button) {
                 // store the operator clicked to operator
             // else if decimal was pushed
                 // add decimal to number
+        }
         // else if display is a number other than "0"
             // if number was pushed
                 // if display contains less than 9 numbers
@@ -93,6 +99,7 @@ function calculate(button) {
             // else if decimal was pushed
                 // if no decimal in number yet
                     // add decimal to number
+    }
     // else 
         // if display === "0"
             // if number was pushed
