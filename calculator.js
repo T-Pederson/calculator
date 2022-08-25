@@ -19,11 +19,15 @@ function divide(a, b) {
 
 
 function operate(operator, a, b) {
-    // Restrict return value to 9 numbers
-        // round decimal if needed to fit number
-        // output scientific notation if needed to fit number
-    // Return "NaN" if output is not a number
-    return operator(a, b);
+    let solution = operator(a, b);
+    // Return "ERROR" if output is not a number
+    if (isNaN(solution) || typeof solution !== 'number') {
+        return "ERROR";
+    } else {
+        // Restrict return value to 9 numbers
+            // round decimal if needed to fit number
+            // output scientific notation if needed to fit number
+    }
 }
 
 
