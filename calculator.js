@@ -74,31 +74,38 @@ let operator;
 function calculate(button) {
     let result = document.querySelector(".result").innerText;
     const pushed = button.target.innerText;
-    console.log(typeof result);
-    console.log(typeof pushed);
     if (firstNumber === undefined) {
         if (result === "0") {
-            // if number was pushed
-                // clear display 
-                // put in new number to the display
-            // else if operator was pushed
-                // store the display value to firstNumber
-                // store the operator clicked to operator
-            // else if decimal was pushed
-                // add decimal to number
+            if (pushed === '÷' || pushed === 'x' || pushed === '-' || pushed === '+') {
+                firstNumber = result;
+                operator = pushed;
+            }
+            else if (pushed === ".") {
+                document.querySelector(".result").innerText += ".";
+            }
+            else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
+                document.querySelector(".result").innerText = pushed;
+            }
         }
-        // else if display is a number other than "0"
-            // if number was pushed
-                // if display contains less than 9 numbers
-                    // add number to the display text
-            // else if operator was pushed
-                // store display value to firstNumber
-                // store the operator clicked to operator
-            // else if clear was pushed
-                // reset display to 0
-            // else if decimal was pushed
-                // if no decimal in number yet
-                    // add decimal to number
+        else if (typeof parseInt(result) === 'number' && !isNaN(parseInt(result))) {
+            if (pushed === '÷' || pushed === 'x' || pushed === '-' || pushed === '+') {
+                firstNumber = result;
+                operator = pushed;
+            }
+            else if (pushed === 'CLEAR') {
+                document.querySelector(".result").innerText = "0";
+            }
+            else if (pushed === ".") {
+                if (result.includes(".") === false && result.replace('.', '').length < 9) {
+                    document.querySelector(".result").innerText += ".";
+                }
+            }
+            else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
+                if (result.replace('.', '').length < 9) {
+                    document.querySelector(".result").innerText += pushed;
+                }
+            }
+        }
     }
     // else 
         // if display === "0"
