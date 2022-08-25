@@ -61,13 +61,13 @@ function buttonUp(button) {
 
 
 // Start tracking variables
-firstNumber = null;
-secondNumber = null;
-operator = null;
+let firstNumber;
+let secondNumber;
+let operator;
 
 // Handle all scenarios of button presses for the calculator
 function calculate(button) {
-    // if firstNumber === null
+    // if firstNumber === undefined
         // if display === "0"
             // if number was pushed
                 // clear display 
@@ -100,8 +100,8 @@ function calculate(button) {
                 // change firstNumber to display value
                 // change operator to operator that was pushed
             // else if clear was pushed
-                // reset firstNumber to null
-                // reset operator to null
+                // reset firstNumber to undefined
+                // reset operator to undefined
             // else if decimal was pushed
                 // add decimal to number
             // else if operate was pushed
