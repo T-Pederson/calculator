@@ -75,8 +75,11 @@ function calculate(button) {
             // else if operator was pushed
                 // store the display value to firstNumber
                 // store the operator clicked to operator
+            // else if clear was pushed
+                // if decimal in number
+                    // reset display to 0
             // else if decimal was pushed
-                // if no decimal in number yet
+                // if display contains decimal
                     // add decimal to number
         // else if display is a number
             // if number was pushed
@@ -100,8 +103,11 @@ function calculate(button) {
                 // change firstNumber to display value
                 // change operator to operator that was pushed
             // else if clear was pushed
-                // reset firstNumber to null
-                // reset operator to null
+                // if display contains decimal
+                    // reset display to 0
+                // else
+                    // reset firstNumber to null
+                    // reset operator to null
             // else if decimal was pushed
                 // if no decimal in number yet
                     // add decimal to number
