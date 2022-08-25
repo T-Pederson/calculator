@@ -19,7 +19,7 @@ function divide(a, b) {
 
 
 function operate(operator, a, b) {
-    // Restrict value to 9 numbers
+    // Restrict return value to 9 numbers
         // round decimal if needed to fit number
         // output scientific notation if needed to fit number
     // Return "NaN" if output is not a number
@@ -65,25 +65,22 @@ firstNumber = null;
 secondNumber = null;
 operator = null;
 
-// Handle all scenarios of different button presses for the calculator, to occur on mouse down event
+// Handle all scenarios of button presses for the calculator
 function calculate(button) {
     // if firstNumber === null
-        // if display === 0
+        // if display === "0"
             // if number was pushed
                 // clear display 
                 // put in new number to the display
             // else if operator was pushed
                 // store the display value to firstNumber
                 // store the operator clicked to operator
-            // else if clear was pushed
-                // if decimal in number
-                    // reset display to 0
             // else if decimal was pushed
-                // if display contains decimal
-                    // add decimal to number
-        // else if display is a number
+                // add decimal to number
+        // else if display is a number other than "0"
             // if number was pushed
-                // add number to the display text
+                // if display contains less than 9 numbers
+                    // add number to the display text
             // else if operator was pushed
                 // store display value to firstNumber
                 // store the operator clicked to operator
@@ -93,7 +90,7 @@ function calculate(button) {
                 // if no decimal in number yet
                     // add decimal to number
     // else 
-        // if display === 0
+        // if display === "0"
             // if number was pushed
                 // clear display
                 // put in new number to the display
@@ -103,21 +100,18 @@ function calculate(button) {
                 // change firstNumber to display value
                 // change operator to operator that was pushed
             // else if clear was pushed
-                // if display contains decimal
-                    // reset display to 0
-                // else
-                    // reset firstNumber to null
-                    // reset operator to null
+                // reset firstNumber to null
+                // reset operator to null
             // else if decimal was pushed
-                // if no decimal in number yet
-                    // add decimal to number
+                // add decimal to number
             // else if operate was pushed
                 // set secondNumber to display value
                 // change display to operate(operator, firstNumber, secondNumber)
                 // change firstNumber to display value
-        // else
+        // else if display is a number other than "0"
             // if number was pushed
-                // add number to the display text
+                // if display contains less than 9 numbers
+                    // add number to the display text
             // else if operator was pushed
                 // set secondNumber to display value
                 // change display to operate(operator, firstNumber, secondNumber)
