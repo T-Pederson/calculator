@@ -1,10 +1,10 @@
 function add(a, b) {
-    return a + b;
+    return parseInt(a) + parseInt(b);
 }
 
 
 function subtract(a, b) {
-    return a - b;
+    return parseInt(a) - parseInt(b);
 }
 
 
@@ -19,15 +19,30 @@ function divide(a, b) {
 
 
 function operate(operator, a, b) {
+    if (operator === "÷") {
+        operator = divide;
+    }
+    else if (operator === "x") {
+        operator = multiply;
+    }
+    else if (operator === "-") {
+        operator = subtract;
+    }
+    else if (operator === "+") {
+        operator = add;
+    }
     let solution = operator(a, b);
     // Return "ERROR" if output is not a number
     if (isNaN(solution) || typeof solution !== 'number') {
         return "ERROR";
     } else {
-        // if solution contains more than 9 numbers
-            // return scientific notation of solution to fit number
-        // else
-            // return solution;
+        // if solution contains more than 9 numbers return scientific notation
+        if (solution.toString().replace('.', '').length > 9) {
+            solution = solution.toExponential(0);
+            return solution;
+        } else {
+            return solution;
+        }
     }
 }
 
@@ -48,7 +63,7 @@ function buttonDown(button) {
         button.target.classList.add("buttonDownOperator");
     } else if (button.target.classList.contains("number") || button.target.classList.contains("decimal")) {
         button.target.classList.add("buttonDownNumber");
-    } else if (button.target.classList.contains("clear")) {
+    } else if (button.target.classList.contains("CLEAR")) {
         button.target.classList.add("buttonDownClear");
     }
 }
@@ -60,7 +75,7 @@ function buttonUp(button) {
         button.target.classList.remove("buttonDownOperator");
     } else if (button.target.classList.contains("number") || button.target.classList.contains("decimal")) {
         button.target.classList.remove("buttonDownNumber");
-    } else if (button.target.classList.contains("clear")) {
+    } else if (button.target.classList.contains("CLEAR")) {
         button.target.classList.remove("buttonDownClear");
     }
 }
@@ -70,80 +85,101 @@ function buttonUp(button) {
 let firstNumber;
 let secondNumber;
 let operator;
+let firstInput = true;
 
 
 // Handle all scenarios of button presses for the calculator
 function calculate(button) {
     let result = document.querySelector(".result").innerText;
     const pushed = button.target.innerText;
-    if (firstNumber === undefined) {
+    if (firstNumber === undefined || firstNumber === "ERROR") {
         if (result === "0") {
             if (pushed === '÷' || pushed === 'x' || pushed === '-' || pushed === '+') {
                 firstNumber = result;
                 operator = pushed;
-            }
-            else if (pushed === ".") {
+            } else if (pushed === ".") {
                 document.querySelector(".result").innerText += ".";
-            }
-            else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
+            } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
                 document.querySelector(".result").innerText = pushed;
             }
-        }
-        else if (typeof parseInt(result) === 'number' && !isNaN(parseInt(result))) {
+        } else {
             if (pushed === '÷' || pushed === 'x' || pushed === '-' || pushed === '+') {
                 firstNumber = result;
                 operator = pushed;
-            }
-            else if (pushed === 'CLEAR') {
+            } else if (pushed === 'CLEAR') {
                 document.querySelector(".result").innerText = "0";
-            }
-            else if (pushed === ".") {
+            } else if (pushed === ".") {
                 if (result.includes(".") === false && result.replace('.', '').length < 9) {
                     document.querySelector(".result").innerText += ".";
                 }
-            }
-            else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
+            } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
                 if (result.replace('.', '').length < 9) {
                     document.querySelector(".result").innerText += pushed;
                 }
             }
         }
     } else {
-        // if display === "0"
-            // if number was pushed
-                // clear display
-                // put in new number to the display
-            // else if operator was pushed
-                // set secondNumber to display value
-                // change display to operate(operator, firstNumber, secondNumber)
-                // change firstNumber to display value
-                // change operator to operator that was pushed
-            // else if clear was pushed
-                // reset firstNumber to undefined
-                // reset operator to undefined
-            // else if decimal was pushed
-                // add decimal to number
-            // else if operate was pushed
-                // set secondNumber to display value
-                // change display to operate(operator, firstNumber, secondNumber)
-                // change firstNumber to display value
-        // else if display is a number other than "0"
-            // if number was pushed
-                // if display contains less than 9 numbers
-                    // add number to the display text
-            // else if operator was pushed
-                // set secondNumber to display value
-                // change display to operate(operator, firstNumber, secondNumber)
-                // change firstNumber to display value
-                // change operator to operator that was pushed
-            // else if clear was pushed
-                // reset display to 0
-            // else if decimal was pushed
-                // if no decimal in number yet
-                    // add decimal to number
-            // else if operate was pushed
-                // set secondNumber to display value
-                // change display to operate(operator, firstNumber, secondNumber)
-                // change firstsNumber to display value
+        if (result === "0") {
+            if (pushed === '÷' || pushed === 'x' || pushed === '-' || pushed === '+') {
+                secondNumber = result;
+                document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
+                firstNumber = document.querySelector(".result").innerText;
+                operator = pushed;
+            } else if (pushed === 'CLEAR') {
+                firstNumber = undefined;
+                operator = undefined;
+                firstInput = true;
+            } else if (pushed === ".") {
+                document.querySelector(".result").innerText += ".";
+                firstInput = false;
+            } else if (pushed === "=") {
+                secondNumber = result;
+                document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
+                firstNumber = document.querySelector(".result").innerText;
+                firstInput = true;
+            } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
+                if (result.replace('.', '').length < 9) {
+                    if (firstInput === true) {
+                        document.querySelector(".result").innerText = pushed;
+                    }
+                }
+            }
+        } else {
+            if (pushed === '÷' || pushed === 'x' || pushed === '-' || pushed === '+') {
+                secondNumber = result;
+                document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
+                firstNumber = document.querySelector(".result").innerText;
+                operator = pushed;
+                firstInput = true;
+            } else if (pushed === 'CLEAR') {
+                firstNumber = undefined;
+                operator = undefined;
+                firstInput = true;
+                document.querySelector(".result").innerText = "0";
+            } else if (pushed === ".") {
+                if (result.includes(".") === false && result.replace('.', '').length < 9) {
+                    if (firstInput === true) {
+                        document.querySelector(".result").innerText = "0.";
+                        firstInput = false;
+                    } else {
+                        document.querySelector(".result").innerText += ".";
+                    }
+                }
+            } else if (pushed === "=") {
+                secondNumber = result;
+                document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
+                firstNumber = document.querySelector(".result").innerText;
+                firstInput = true;
+            } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
+                if (firstInput === true) {
+                    document.querySelector(".result").innerText = pushed;
+                    firstInput = false;
+                } else {
+                    if (result.replace('.', '').length < 9) {
+                        document.querySelector(".result").innerText += pushed;
+                    }
+                }
+            }
+        }
     }
 }
