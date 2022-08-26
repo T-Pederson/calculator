@@ -141,11 +141,15 @@ function calculate(button) {
                 document.querySelector(".result").innerText += ".";
                 firstInput = false;
             } else if (pushed === "=") {
-                secondNumber = result;
-                document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
-                firstNumber = document.querySelector(".result").innerText;
-                firstInput = true;
-                afterEquals = true;
+                if (afterEquals === true) {
+                    firstNumber = result;
+                } else {
+                    secondNumber = result;
+                    document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
+                    firstNumber = document.querySelector(".result").innerText;
+                    firstInput = true;
+                    afterEquals = true;
+                }
             } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
                 if (result.replace('.', '').length < 9) {
                     if (firstInput === true) {
@@ -183,6 +187,9 @@ function calculate(button) {
                     }
                 }
             } else if (pushed === "=") {
+                if (afterEquals === true) {
+                    firstNumber = result;
+                }
                 secondNumber = result;
                 document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
                 firstNumber = document.querySelector(".result").innerText;
