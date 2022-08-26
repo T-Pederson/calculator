@@ -1,20 +1,20 @@
 function add(a, b) {
-    return parseInt(a) + parseInt(b);
+    return Math.round((parseFloat(a) + parseFloat(b)) * 100000000) / 100000000;
 }
 
 
 function subtract(a, b) {
-    return parseInt(a) - parseInt(b);
+    return Math.round((parseFloat(a) - parseFloat(b)) * 100000000) / 100000000;
 }
 
 
 function multiply(a, b) {
-    return a * b;
+    return Math.round((parseFloat(a) * parseFloat(b)) * 100000000) / 100000000;
 }
 
 
 function divide(a, b) {
-    return a / b;
+    return Math.round((parseFloat(a) / parseFloat(b)) * 100000000) / 100000000;
 }
 
 
@@ -37,7 +37,7 @@ function operate(operator, a, b) {
         return "ERROR";
     } else {
         // if solution contains more than 9 numbers return scientific notation
-        if (solution.toString().replace('.', '').length > 9) {
+        if (solution.toString().replace('.', '').replace('-', '').length > 9) {
             solution = solution.toExponential(0);
             return solution;
         } else {
@@ -110,11 +110,11 @@ function calculate(button) {
             } else if (pushed === 'CLEAR') {
                 document.querySelector(".result").innerText = "0";
             } else if (pushed === ".") {
-                if (result.includes(".") === false && result.replace('.', '').length < 9) {
+                if (result.includes(".") === false && result.replace('.', '').replace('-', '').length < 9) {
                     document.querySelector(".result").innerText += ".";
                 }
             } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
-                if (result.replace('.', '').length < 9) {
+                if (result.replace('.', '').replace('-', '').length < 9) {
                     document.querySelector(".result").innerText += pushed;
                 }
             }
@@ -151,7 +151,7 @@ function calculate(button) {
                     afterEquals = true;
                 }
             } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
-                if (result.replace('.', '').length < 9) {
+                if (result.replace('.', '').replace('-', '').length < 9) {
                     if (afterEquals === true) {
                         firstNumber = undefined;
                         operator = undefined;
@@ -185,12 +185,12 @@ function calculate(button) {
                 afterEquals = false;
                 document.querySelector(".result").innerText = "0";
             } else if (pushed === ".") {
-                if (result.includes(".") === false && result.replace('.', '').length < 9) {
                     if (firstInput === true) {
                         document.querySelector(".result").innerText = "0.";
                         firstInput = false;
                     } else {
-                        document.querySelector(".result").innerText += ".";
+                        if (result.includes(".") === false && result.replace('.', '').replace('-', '').length < 9) {
+                            document.querySelector(".result").innerText += ".";
                     }
                 }
             } else if (pushed === "=") {
@@ -216,7 +216,7 @@ function calculate(button) {
                         }
                     }
                 } else {
-                    if (result.replace('.', '').length < 9) {
+                    if (result.replace('.', '').replace('-', '').length < 9) {
                         document.querySelector(".result").innerText += pushed;
                     }
                 }
