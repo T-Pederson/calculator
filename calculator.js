@@ -152,9 +152,16 @@ function calculate(button) {
                 }
             } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
                 if (result.replace('.', '').length < 9) {
-                    if (firstInput === true) {
+                    if (afterEquals === true) {
+                        firstNumber = undefined;
+                        operator = undefined;
+                        afterEquals = false;
                         document.querySelector(".result").innerText = pushed;
-                        firstInput = false;
+                    } else {
+                        if (firstInput === true) {
+                            document.querySelector(".result").innerText = pushed;
+                            firstInput = false;
+                        }
                     }
                 }
             }
@@ -197,9 +204,16 @@ function calculate(button) {
                 afterEquals = true;
             } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
                 if (firstInput === true) {
-                    document.querySelector(".result").innerText = pushed;
-                    if (pushed !== "0") {
-                        firstInput = false;
+                    if (afterEquals === true) {
+                        firstNumber = undefined;
+                        operator = undefined;
+                        afterEquals = false;
+                        document.querySelector(".result").innerText = pushed;
+                    } else {
+                        document.querySelector(".result").innerText = pushed;
+                        if (pushed !== "0") {
+                            firstInput = false;
+                        }
                     }
                 } else {
                     if (result.replace('.', '').length < 9) {
