@@ -41,6 +41,7 @@ for(button of buttons) {
     button.addEventListener("mouseup", buttonUp);
 }
 
+
 // Make buttons look like they're being pushed
 function buttonDown(button) {
     if (button.target.classList.contains("operator") || button.target.classList.contains("operate")) {
@@ -69,6 +70,7 @@ function buttonUp(button) {
 let firstNumber;
 let secondNumber;
 let operator;
+
 
 // Handle all scenarios of button presses for the calculator
 function calculate(button) {
@@ -106,8 +108,7 @@ function calculate(button) {
                 }
             }
         }
-    }
-    // else 
+    } else {
         // if display === "0"
             // if number was pushed
                 // clear display
@@ -144,4 +145,5 @@ function calculate(button) {
                 // set secondNumber to display value
                 // change display to operate(operator, firstNumber, secondNumber)
                 // change firstsNumber to display value
+    }
 }
