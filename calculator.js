@@ -86,6 +86,7 @@ let firstNumber;
 let secondNumber;
 let operator;
 let firstInput = true;
+let afterEquals = false;
 
 
 // Handle all scenarios of button presses for the calculator
@@ -121,14 +122,21 @@ function calculate(button) {
     } else {
         if (result === "0") {
             if (pushed === '÷' || pushed === 'x' || pushed === '-' || pushed === '+') {
-                secondNumber = result;
-                document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
-                firstNumber = document.querySelector(".result").innerText;
-                operator = pushed;
+                if (afterEquals === true) {
+                    operator = pushed;
+                    afterEquals = false;
+                } else {
+                    secondNumber = result;
+                    document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
+                    firstNumber = document.querySelector(".result").innerText;
+                    operator = pushed;
+                    afterEquals = false;
+                }
             } else if (pushed === 'CLEAR') {
                 firstNumber = undefined;
                 operator = undefined;
                 firstInput = true;
+                afterEquals = false;
             } else if (pushed === ".") {
                 document.querySelector(".result").innerText += ".";
                 firstInput = false;
@@ -137,6 +145,7 @@ function calculate(button) {
                 document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
                 firstNumber = document.querySelector(".result").innerText;
                 firstInput = true;
+                afterEquals = true;
             } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
                 if (result.replace('.', '').length < 9) {
                     if (firstInput === true) {
@@ -147,15 +156,22 @@ function calculate(button) {
             }
         } else {
             if (pushed === '÷' || pushed === 'x' || pushed === '-' || pushed === '+') {
-                secondNumber = result;
-                document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
-                firstNumber = document.querySelector(".result").innerText;
-                operator = pushed;
-                firstInput = true;
+                if (afterEquals === true) {
+                    operator = pushed;
+                    afterEquals = false;
+                } else {
+                    secondNumber = result;
+                    document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
+                    firstNumber = document.querySelector(".result").innerText;
+                    operator = pushed;
+                    firstInput = true;
+                    afterEquals = false;
+                }
             } else if (pushed === 'CLEAR') {
                 firstNumber = undefined;
                 operator = undefined;
                 firstInput = true;
+                afterEquals = false;
                 document.querySelector(".result").innerText = "0";
             } else if (pushed === ".") {
                 if (result.includes(".") === false && result.replace('.', '').length < 9) {
@@ -171,6 +187,7 @@ function calculate(button) {
                 document.querySelector(".result").innerText = operate(operator, firstNumber, secondNumber);
                 firstNumber = document.querySelector(".result").innerText;
                 firstInput = true;
+                afterEquals = true;
             } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
                 if (firstInput === true) {
                     document.querySelector(".result").innerText = pushed;
