@@ -141,6 +141,7 @@ function calculate(button) {
                 if (result.replace('.', '').length < 9) {
                     if (firstInput === true) {
                         document.querySelector(".result").innerText = pushed;
+                        firstInput = false;
                     }
                 }
             }
@@ -173,7 +174,9 @@ function calculate(button) {
             } else if (typeof parseInt(pushed) === 'number' && !isNaN(parseInt(pushed))) {
                 if (firstInput === true) {
                     document.querySelector(".result").innerText = pushed;
-                    firstInput = false;
+                    if (pushed !== "0") {
+                        firstInput = false;
+                    }
                 } else {
                     if (result.replace('.', '').length < 9) {
                         document.querySelector(".result").innerText += pushed;
